@@ -8,7 +8,8 @@ pipeline {
         }
         stage('zip') {
             steps {
-
+                zip dir: '', glob: '', zipFile: 'src.zip'
+                sh label: 'list files', script: 'ls -l'
             }
         }
         stage('clone-wait') {
@@ -34,6 +35,11 @@ pipeline {
         stage('delete-old') {
             steps {
             }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
         }
     }
 }
