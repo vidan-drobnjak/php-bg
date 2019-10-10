@@ -9,15 +9,15 @@ pipeline {
         stage('zip') {
             steps {
                 zip dir: '', glob: '', zipFile: 'src.zip'
-                sh label: 'list files', script: 'ls -l'
+                
             }
         }
         stage('clone-wait') {
             steps {
-
+                sh label: 'list files', script: 'ls -l'
             }
         }
-        stage('create-version') {
+        /*stage('create-version') {
             steps {
 
             }
@@ -35,7 +35,7 @@ pipeline {
         stage('delete-old') {
             steps {
             }
-        }
+        } */
     }
     post { 
         always { 
