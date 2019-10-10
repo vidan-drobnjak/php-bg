@@ -8,7 +8,7 @@ pipeline {
         }
         stage('zip') {
             steps {
-                zip dir: '', glob: '', zipFile: 'src.zip'
+                sh label: 'zip file', script: 'zip src.zip index.php'
                 
             }
         }
