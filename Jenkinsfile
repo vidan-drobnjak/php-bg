@@ -8,6 +8,14 @@ pipeline {
         text(name: 'env', defaultValue: '', description: 'Which environment?')
     }
     stages { 
+        stage("Check Preconditions") {
+            script {
+                if(!continueBuild) {
+                    currentBuild.result = 'ABORTED'
+                    error('Stopping early…')
+                }
+            }
+        }
         stage('ls') {
             steps {
                 sh label: 'list files', script: 'ls -l'
