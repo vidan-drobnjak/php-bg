@@ -1,6 +1,6 @@
 
 def number = 'UNKNOWN'
-def e = 'dev'
+def environment = 'UNKNOWN'
 // \b\w*\my-app-\d*\b
 
 pipeline {
@@ -12,11 +12,12 @@ pipeline {
         stage("Check Parameter Value") {
             steps {
                 echo "Check parameter value"
-                //script {
-                    //if(${params.ENV} != 'dev') {
-                 //       error('Aborted beacause value of parameter')
-                 //   }
-                //}
+                script {
+                    environment = ${params.ENV}
+                    if(environment != 'dev') {
+                        error('Aborted beacause value of parameter')
+                    }
+                }
                 echo "${params.ENV}"
             }
         }
