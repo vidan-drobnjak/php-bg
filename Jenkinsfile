@@ -10,9 +10,12 @@ pipeline {
     }
     stages { 
         stage("Check Parameter Value") {
-            script {
-                if(${params.ENV} != e) {
-                    error('Aborted beacause value of parameter')
+            steps {
+                echo "Check parameter value"
+                script {
+                    if(${params.ENV} != e) {
+                        error('Aborted beacause value of parameter')
+                    }
                 }
             }
         }
