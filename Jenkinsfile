@@ -6,7 +6,7 @@ def e = 'dev'
 pipeline {
     agent any
     parameters {
-        text(name: 'ENV', defaultValue: '', description: 'Which environment?')
+        string(name: 'ENV', defaultValue: '', description: 'Which environment?')
     }
     stages { 
         stage("Check Parameter Value") {
