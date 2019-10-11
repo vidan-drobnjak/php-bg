@@ -5,23 +5,23 @@ def number = 'UNKNOWN'
 pipeline {
     agent any
     parameters {
-        text(name: 'env', defaultValue: '', description: 'Which environment?')
+        text(name: 'ENV', defaultValue: '', description: 'Which environment?')
     }
     stages { 
-        stage("Check Preconditions") {
+        stage("Check Parameter Value") {
             script {
-                if(!continueBuild) {
-                    currentBuild.result = 'ABORTED'
-                    error('Stopping early…')
+                if(${params.ENV} != "dev") {
+                    error('Aborted beacause value of parameter')
                 }
             }
         }
         stage('ls') {
             steps {
-                sh label: 'list files', script: 'ls -l'
+                echo "${params.ENV}"
+                //sh label: 'list files', script: 'ls -l'
             }
         }
-        stage('zip') {
+        /*stage('zip') {
             steps {
                 sh label: 'zip file', script: 'zip src.zip index.php'
                 
@@ -32,7 +32,7 @@ pipeline {
                 sh label: 'list files', script: 'ls -l'
             }
         }
-        /*stage('create-version') {
+        stage('create-version') {
             steps {
 
             }
