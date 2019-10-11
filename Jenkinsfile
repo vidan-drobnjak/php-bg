@@ -1,5 +1,12 @@
+
+def number = 'UNKNOWN'
+// \b\w*\my-app-\d*\b
+
 pipeline {
     agent any
+    parameters {
+        text(name: 'env', defaultValue: '', description: 'Which environment?')
+    }
     stages { 
         stage('ls') {
             steps {
