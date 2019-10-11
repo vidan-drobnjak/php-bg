@@ -1,5 +1,6 @@
 
 def number = 'UNKNOWN'
+def e = "dev"
 // \b\w*\my-app-\d*\b
 
 pipeline {
@@ -10,7 +11,7 @@ pipeline {
     stages { 
         stage("Check Parameter Value") {
             script {
-                if(${params.ENV} != "dev") {
+                if(${params.ENV} != e) {
                     error('Aborted beacause value of parameter')
                 }
             }
