@@ -14,7 +14,7 @@ pipeline {
                 echo "Check parameter value"
                 script {
                     environment = ${params.ENV}
-                    if(environment != 'dev') {
+                    if(environment.equals('dev')) {
                         error('Aborted beacause value of parameter')
                     }
                 }
