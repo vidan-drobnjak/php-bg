@@ -1,6 +1,6 @@
 
 def number = 'UNKNOWN'
-def e = "dev"
+def e = 'dev'
 // \b\w*\my-app-\d*\b
 
 pipeline {
