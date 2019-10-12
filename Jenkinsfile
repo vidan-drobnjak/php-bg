@@ -27,7 +27,7 @@ pipeline {
                     eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                 | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u)"
+                                 | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u")
                 }
                 echo "${eb_env}"
             }
