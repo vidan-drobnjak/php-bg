@@ -1,7 +1,4 @@
-
-def info = 'UNKNOWN'
-def eb_env= 'UNKNOWN'
-//cat ebenv.json | grep -o 'my-env-[0-9]*[0-9]' | sort -u
+def eb_env
 
 pipeline {
     agent any
