@@ -25,8 +25,7 @@ pipeline {
             steps {
                 sh label: 'get environment info', script: 'aws elasticbeanstalk describe-environments \
                             --application-name blue-green \
-                            --region us-east-1 \
-                            | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u'
+                            --region us-east-1 | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u'
                 //sh label: 'list files', script: 'ls -l'
             }
         }
