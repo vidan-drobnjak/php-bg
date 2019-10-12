@@ -28,8 +28,8 @@ pipeline {
                                 --application-name blue-green \
                                 --region us-east-1 \
                                  | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u)"
-                    println ${eb_env}   
                 }
+                echo "${eb_env}"
             }
         }
         /*stage('zip') {
