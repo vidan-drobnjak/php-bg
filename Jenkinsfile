@@ -39,12 +39,12 @@ pipeline {
         }
         stage('create-version') {
             steps {
-                script {
-                    eb_env_id = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
+                sh label: '', script: 'aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                --environment-names ${eb_env} \
-                                | jq -r '.Environments[0] .EnvironmentId'")
+                                --environment-names ${eb_env} > eb_info.json'
+                script {
+                    eb_env_id = sh(returnStdout: true, script: "jq -r '.Environments[0] .EnvironmentId' eb_info.json")
                 }
                 echo "${eb_env_id}"
             }
