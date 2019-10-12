@@ -43,7 +43,7 @@ pipeline {
                     eb_env_id = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                --environment-names "${eb_env}" \
+                                --environment-names '${eb_env}' \
                                 | jq -r '.Environments[0] .EnvironmentId'")
                 }
                 echo "${eb_env_id}"
