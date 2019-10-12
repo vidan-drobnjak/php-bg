@@ -1,4 +1,5 @@
 def eb_env
+def eb_env_id
 
 pipeline {
     agent any
@@ -38,10 +39,12 @@ pipeline {
         }
         stage('create-version') {
             steps {
-                sh label: 'get-ev-info', script: "aws elasticbeanstalk describe-environments \
+                script {
+                    eb_env_id = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                     --application-name blue-green \
                                     --region us-east-1 \
                                     --environment-names ${eb_env} | jq -r '.Environments[0] .EnvironmentId'"
+                }
             }
         }
         /*stage('create-version') {
