@@ -23,10 +23,14 @@ pipeline {
         }
         stage('ls') {
             steps {
-                sh label: '', script: 'aws elasticbeanstalk describe-environments \
+                environment = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
-                                --region us-east-1 > info.txt'
-                sh label: '', script: "cat info.txt | grep -o 'my-env-[0-9]*[0-9]' | sort -u"
+                                --region us-east-1 \
+                                 | grep -o 'my-env-[0-9]*[0-9]' | sort -u"
+                                 
+                script {
+                    print ${environment}
+                }
             }
         }
         /*stage('zip') {
