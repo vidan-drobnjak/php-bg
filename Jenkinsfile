@@ -1,5 +1,4 @@
 def eb_env
-def number = 28
 
 pipeline {
     agent any
