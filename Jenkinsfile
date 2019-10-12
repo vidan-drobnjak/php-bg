@@ -15,7 +15,7 @@ pipeline {
                 script {
                     //Parameter validation
                     if (!("${params.ENV}" =="dev" || "${params.ENV}" == "test")) {
-                        error('Aborted beacause value of parameter')
+                        error('Aborted beacause of parameter value')
                     }
                 }
                 
