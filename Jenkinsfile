@@ -11,14 +11,14 @@ pipeline {
     stages { 
         stage("Check Parameter Value") {
             steps {
-                echo "Check parameter value"
+                echo "Checking parameter value: ${params.ENV}"
                 script {
                     //Parameter validation
                     if (!("${params.ENV}" =="dev" || "${params.ENV}" == "test") ){
                         error('Aborted beacause value of parameter')
                     }
                 }
-                echo "${params.ENV}"
+                
             }
         }
         stage('ls') {
