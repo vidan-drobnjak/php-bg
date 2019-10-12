@@ -23,7 +23,7 @@ pipeline {
         }
         stage('ls') {
             steps {
-                sh label: 'get environment info', script: 'aws elasticbeanstalk describe-environments --application-name blue-green'
+                sh label: 'get environment info', script: 'aws elasticbeanstalk describe-environments --application-name blue-green --region us-east-1'
                 //sh label: 'list files', script: 'ls -l'
             }
         }
