@@ -1,6 +1,6 @@
 
 def info = 'UNKNOWN'
-def env= 'UNKNOWN'
+def eb_env= 'UNKNOWN'
 //cat ebenv.json | grep -o 'my-env-[0-9]*[0-9]' | sort -u
 
 pipeline {
@@ -23,11 +23,12 @@ pipeline {
         }
         stage('ls') {
             steps {
-                environment = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
+                script {
+                eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
                                  | grep -o 'my-env-[0-9]*[0-9]' | sort -u)"
-                                 
+                println ${eb_env}                
             }
         }
         /*stage('zip') {
