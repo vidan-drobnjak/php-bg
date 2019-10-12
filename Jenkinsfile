@@ -26,7 +26,7 @@ pipeline {
                 sh label: '', script: 'aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 > info.txt'
-                sh label: '', script: 'cat info.txt'
+                sh label: '', script: 'cat info.txt | grep -o 'my-env-[0-9]*[0-9]' | sort -u'
             }
         }
         /*stage('zip') {
