@@ -5,9 +5,6 @@ def env= 'UNKNOWN'
 
 pipeline {
     agent any
-    environment {
-        EB_ENV = 'x'
-    }
     parameters {
         string(name: 'ENV', defaultValue: '', description: 'Which environment?')
     }
@@ -29,7 +26,7 @@ pipeline {
                 environment = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                 | grep -o 'my-env-[0-9]*[0-9]' | sort -u"
+                                 | grep -o 'my-env-[0-9]*[0-9]' | sort -u)"
                                  
             }
         }
