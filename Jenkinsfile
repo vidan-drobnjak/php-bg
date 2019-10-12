@@ -7,7 +7,7 @@ pipeline {
         string(name: 'ENV', defaultValue: '', description: 'Which environment?')
     }
     stages { 
-        stage("Check Parameter Value") {
+        stage("Parameter validation") {
             steps {
                 echo "Checking parameter value: ${params.ENV}"
                 script {
@@ -19,7 +19,7 @@ pipeline {
                 
             }
         }
-        stage('Get Environment Name') {
+        stage('Get environment name') {
             steps {
                 //sh script: 'aws elasticbeanstalk describe-environments --application-name blue-green --region us-east-1'
                 script {
@@ -37,8 +37,9 @@ pipeline {
                 sh label: 'list files', script: 'ls -l'
             }
         }
-        stage('create-version') {
+        stage('Create configuration template') {
             steps {
+                //Get environment ID
                 sh label: '', script: 'aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
@@ -47,6 +48,11 @@ pipeline {
                     eb_env_id = sh(returnStdout: true, script: "jq -r '.Environments[0] .EnvironmentId' eb_info.json")
                 }
                 echo "${eb_env_id}"
+                //Create configuration template
+                sh label: 'create conf template', script: "aws elasticbeanstalk create-configuration-template \
+                                 --application-name blue-green \
+                                 --template-name ${eb_env} \
+                                 --environment-id ${eb_env_id}"            
             }
         }
         /*stage('create-version') {
