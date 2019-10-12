@@ -23,7 +23,7 @@ pipeline {
         }
         stage('ls') {
             steps {
-                echo "${params.ENV}"
+                sh label: 'get environment info', script: 'aws elasticbeanstalk describe-environments --application-name blue-green'
                 //sh label: 'list files', script: 'ls -l'
             }
         }
