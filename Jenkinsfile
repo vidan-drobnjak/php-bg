@@ -26,7 +26,7 @@ pipeline {
                     eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                 | grep -o 'bg-${params.ENV}-[0-9]*[0-9]' | sort -u")
+                                | grep -o 'bg-${params.ENV}-[0-9]*[0-9]' | sort -u")
                 }
                 echo "${eb_env}"
             }
@@ -43,7 +43,8 @@ pipeline {
                     eb_env_id = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
-                                --environment-names ${eb_env}|jq -r '.Environments[0] .EnvironmentId'")
+                                --environment-names "${eb_env}" \
+                                | jq -r '.Environments[0] .EnvironmentId'")
                 }
                 echo "${eb_env_id}"
             }
