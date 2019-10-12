@@ -23,10 +23,10 @@ pipeline {
         }
         stage('ls') {
             steps {
-                info = sh(returnStdout: true, script: 'aws elasticbeanstalk describe-environments \
-                            --application-name blue-green \
-                            --region us-east-1')
-                sh label: '', script: 'cat info'
+                sh label: '', script: 'aws elasticbeanstalk describe-environments \
+                                --application-name blue-green \
+                                --region us-east-1 > info.txt'
+                sh label: '', script: 'cat info.txt'
             }
         }
         /*stage('zip') {
