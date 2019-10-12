@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "Check parameter value"
                 script {
-                    //environment = ${params.ENV}
+                    //Parameter validation
                     if (!("${params.ENV}" =="dev" || "${params.ENV}" == "test") ){
                         error('Aborted beacause value of parameter')
                     }
