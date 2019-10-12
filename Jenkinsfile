@@ -18,7 +18,7 @@ pipeline {
                 
             }
         }
-        stage('ls') {
+        stage('get environment name') {
             steps {
                 script {
                     eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
