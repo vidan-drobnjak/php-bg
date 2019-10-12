@@ -21,6 +21,7 @@ pipeline {
         }
         stage('Get Environment Name') {
             steps {
+                sh script: 'aws elasticbeanstalk describe-environments --application-name blue-green --region us-east-1'
                 script {
                     eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
@@ -38,7 +39,10 @@ pipeline {
         }
         stage('create-version') {
             steps {
-                sh label: 'create', script: 'ls -l'
+                sh label: 'get-ev-info', script: 'aws elasticbeanstalk describe-environments \
+                                    --application-name blue-green \
+                                    --region us-east-1 \
+                                    --environment-names ${eb_env}'
             }
         }
         /*stage('create-version') {
