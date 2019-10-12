@@ -24,11 +24,12 @@ pipeline {
         stage('ls') {
             steps {
                 script {
-                eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
+                    eb_env = sh(returnStdout: true, script: "aws elasticbeanstalk describe-environments \
                                 --application-name blue-green \
                                 --region us-east-1 \
                                  | grep -o 'bg-dev-[0-9]*[0-9]' | sort -u)"
-                println ${eb_env}                
+                    println ${eb_env}   
+                }
             }
         }
         /*stage('zip') {
