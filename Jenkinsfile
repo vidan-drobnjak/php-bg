@@ -47,13 +47,13 @@ pipeline {
                 script {
                     eb_env_id = sh(returnStdout: true, script: "jq -r '.Environments[0] .EnvironmentId' eb_info.json")
                 }
-                echo "${eb_env_id}"
+                //echo "${eb_env_id}"
                 //Create configuration template
-                sh label: 'create conf template', script: "aws elasticbeanstalk create-configuration-template \
+                sh label: 'create conf template', script: "'aws elasticbeanstalk create-configuration-template \
                                  --application-name blue-green \
-                                 --environment-id '${eb_env_id}' \
+                                 --environment-id ${eb_env_id} \
                                  --region us-east-1 \
-                                 --template-name '${eb_env}-${BUILD_NUMBER}'"           
+                                 --template-name ${eb_env}-${BUILD_NUMBER}'"           
             }
         }
         /*stage('create-version') {
