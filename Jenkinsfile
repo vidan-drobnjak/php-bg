@@ -42,7 +42,7 @@ pipeline {
                 sh label: 'get-ev-info', script: "aws elasticbeanstalk describe-environments \
                                     --application-name blue-green \
                                     --region us-east-1 \
-                                    --environment-names ${eb_env}"
+                                    --environment-names ${eb_env} | jq '.Environments[0] .EnvironmentId'"
             }
         }
         /*stage('create-version') {
