@@ -1,7 +1,7 @@
 
 def number = 'UNKNOWN'
 def environment = 'UNKNOWN'
-// \b\w*\my-app-\d*\b
+//grep -ow 'my-env-[0-9]*[0-9]' ebenv.json | sort -u
 
 pipeline {
     agent any
