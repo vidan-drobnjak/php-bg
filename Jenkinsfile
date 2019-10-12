@@ -51,9 +51,9 @@ pipeline {
                 //Create configuration template
                 sh label: 'create conf template', script: "aws elasticbeanstalk create-configuration-template \
                                  --application-name blue-green \
-                                 --environment-id ${eb_env_id} \
+                                 --environment-id '${eb_env_id}' \
                                  --region us-east-1 \
-                                 --template-name ${eb_env}-v2"           
+                                 --template-name '${eb_env}-${BUILD_NUMBER}'"           
             }
         }
         /*stage('create-version') {
