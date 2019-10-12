@@ -1,10 +1,13 @@
 
 def info = 'UNKNOWN'
-def environment = 'UNKNOWN'
+def env= 'UNKNOWN'
 //cat ebenv.json | grep -o 'my-env-[0-9]*[0-9]' | sort -u
 
 pipeline {
     agent any
+    environment {
+        EB_ENV = 'x'
+    }
     parameters {
         string(name: 'ENV', defaultValue: '', description: 'Which environment?')
     }
@@ -28,9 +31,6 @@ pipeline {
                                 --region us-east-1 \
                                  | grep -o 'my-env-[0-9]*[0-9]' | sort -u"
                                  
-                script {
-                    print ${environment}
-                }
             }
         }
         /*stage('zip') {
